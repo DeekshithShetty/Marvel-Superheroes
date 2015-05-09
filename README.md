@@ -1,2 +1,2 @@
 # Marvel-Superheroes
-Ubuntu desktop application listing Marvel characters and descriptions. 
+Standalone Desktop application listing Marvel characters and descriptions. 

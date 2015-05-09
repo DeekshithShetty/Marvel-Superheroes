@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Marvel</title>
+		<style type="text/css">
+			.comic-container{
+				border-style: solid;
+		    	border-width: 3px;
+		    	padding: 10px;
+				float: left;
+				margin-right: 20px;
+				margin-bottom: 20px;
+				background-color: #87C1EB;
+				width: 160px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body onload="myFunction()">
+		<a href="./home.html">Go Back</a>
+		<h1>Information about Superheros</h1>
+		<br />
+		<div>
+			<h2 id="name"></h2>
+			<img id="thumbnail"></img>
+			<h4 id="description"></h4>
+		</div>
+		<br />
+		<h3>Has appeared in :</h3>
+		<div id="comicTitles">
+
+		</div>
+		<br />
+		<p id="info"></p>
+	</body>
+	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+			var txt;
+			function myFunction(){
+				txt = sessionStorage.getItem('myKeyId');
+			
+				var api = require('marvel-api');
+
+			  	var marvel = api.createClient({
+
+			    	publicKey: 'e0c049e996366ea0bc70bd833e03d31f',
+			    	privateKey: 'c27d45753f1d2a071cea0a7e40a23bd3fad7e16e'
+
+			  	});
+			  	//console.log("Id : ",txt);
+
+			  	marvel.characters.find(txt,function(err, results) {
+			    	if (err) {
+			    		$("#description").append("Couldnt find description..");
+			      		return console.error("Find error");
+			    	}
+			    	//console.log(results.data[0].description);
+			    	document.getElementById("name").innerHTML = results.data[0].name.toString();
+			    	var str1 = results.data[0].thumbnail.path.toString();
+			        var str2 = "/portrait_incredible.jpg";
+			        var imgPath = str1.concat(str2);
+			    	document.getElementById("thumbnail").setAttribute("src", imgPath.toString());
+			    	document.getElementById("description").innerHTML = results.data[0].description.toString();
+			    	//document.getElementById("info").innerHTML = JSON.stringify(results).toString();
+			  	});
+
+			  	marvel.characters.comics(txt,10,0,function(err, results) {
+			  		if (err) {
+			  			$("#comicTitles").append("Couldnt find any comic books..");
+			      		return console.error("Comic book error");
+			    	}
+			    	var len = 0;
+			    	for(var i=0;i < results.data.length;i++){
+			    		var $div = $("<div>",{ class: "comic-container"});
+
+				        var $p = $("<p>").append(results.data[i].title.toString());
+				        var str1 = results.data[i].thumbnail.path.toString();
+				        var str2 = "/portrait_xlarge.jpg";
+				        var imgPath = str1.concat(str2);
+				        var $img = $("<img>",{ src: imgPath.toString() });
+
+				        $div.append($img);
+				        $div.append($p);
+			    		$("#comicTitles").append($div);
+			    		len++;
+			    	}	
+			    	//console.log("Comic titles : " + len);
+			    	//document.getElementById("info").innerHTML = JSON.stringify(results).toString();
+			    	//console.log(JSON.stringify(results).toString());
+			  	});
+
+			  	marvel.characters.stories(txt,function(err, results) {
+			  		if (err) {
+			      		return console.error("Story error");
+			    	}
+			    	var len = 0;
+			    	
+			    	for(var i=0;i < results.data.length;i++){
+			    		/*var $div = $("<div>",{ class: "comic-container"});
+
+				        var $p = $("<p>").append(results.data[i].title.toString());
+				        var str1 = results.data[i].thumbnail.path.toString();
+				        var str2 = "/portrait_xlarge.jpg";
+				        var imgPath = str1.concat(str2);
+				        var $img = $("<img>",{ src: imgPath.toString() });
+
+				        $div.append($img);
+				        $div.append($p);
+			    		$("#comicTitles").append($div);*/
+			    		len++;
+			    	}
+			    		
+			    	console.log("Stories: " + len);
+			    	//document.getElementById("info").innerHTML = JSON.stringify(results).toString();
+			    	//console.log(JSON.stringify(results).toString());
+			  	});
+			  	
+			}
+
+
+	  	</script>
+</html>
+
+

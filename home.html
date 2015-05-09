@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Marvel</title>
+	<style type="text/css">
+	.hero-container{
+		border-style: solid;
+    	border-width: 5px;
+    	padding: 10px;
+		float: left;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		background-color: #87CEEB;
+		width: 180px;
+		height: 320px;
+	}
+	</style>
+</head>
+	<body>
+		<h1>Welcome to Marvel App</h1>
+		<br />
+		<progress id="progress" value="0" max="100"></progress>
+		<p>Search : <input id="searchText" type="search"/><button id="searchButton" onclick="searchButton()">Search</button></p>
+		<div id="DynamicContent" class="container">
+
+		</div>
+		<p id="info"></p>
+	</body>
+	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="./js/app.js"></script>	
+</html>
+
