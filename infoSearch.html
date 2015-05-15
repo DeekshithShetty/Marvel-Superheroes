@@ -3,6 +3,15 @@
 <head>
 	<title>Marvel</title>
 	<style type="text/css">
+	@font-face {
+    	font-family: myFirstFont;
+	    src: url("./css/segoe_ui_light.ttf");
+	}
+	body{
+		font-family: myFirstFont;
+		background-color: #F0F3F0;
+		font-size: 20px;
+	}
 	.hero-container{
 		border-style: solid;
     	border-width: 5px;
@@ -17,11 +26,14 @@
 	</style>
 </head>
 	<body>
+		<a href="./home.html">Go Back</a>
 		<h2>Search Results...</h2>
 		<div id="DynamicContent" class="container">
 
 		</div>
 		<p id="info"></p>
+		<div id="wiki">
+		</div>
 	</body>
 	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript">
@@ -78,4 +90,5 @@
 		});	
 	</script>	
 </html>
+
 

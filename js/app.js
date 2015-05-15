@@ -50,12 +50,8 @@
 
         $("#DynamicContent").append($div);
                    
-          len++;
-        updateProgress();   
+          len++;  
           //if(len == 5)break;
-      }
-      function updateProgress(){
-          document.getElementById("progress").setAttribute("value",len*10);
       }
       //document.getElementById("length").innerHTML = len.toString();
         console.log("Length : ",len);

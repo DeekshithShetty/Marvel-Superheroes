@@ -3,35 +3,84 @@
 	<head>
 		<title>Marvel</title>
 		<style type="text/css">
-			.comic-container{
-				border-style: solid;
-		    	border-width: 3px;
-		    	padding: 10px;
-				float: left;
-				margin-right: 20px;
-				margin-bottom: 20px;
-				background-color: #87C1EB;
-				width: 160px;
-				height: 300px;
+			@font-face {
+				font-family: segoeFont;
+			    src: url("./css/segoe_ui_light.ttf");
+			}
+			@font-face {
+				font-family: marvelFont;
+			    src: url("./css/AmericanCaptain.ttf");
 			}
 		</style>
+		<link rel="stylesheet" type="text/css" href="./css/infoPage.css"></link>
 	</head>
 	<body onload="myFunction()">
-		<a href="./home.html">Go Back</a>
-		<h1>Information about Superheros</h1>
+		<div class="header">
+			<a href="./home.html">&#10096;&#10096;</a>
+		</div>
 		<br />
-		<div>
-			<h2 id="name"></h2>
-			<img id="thumbnail"></img>
+		<br />
+		<div class="left_container scrollbar-red">
+			<h1 id="heroName"></h1>
 			<h4 id="description"></h4>
+			<div id="power_box">
+				<h3 id="name">Power Box</h3>
+				<ul>
+					<li id="universe" class="li_block"></li>
+					<li id="real_name" class="li_block"></li>
+					<li id="aliases" class="li_block"></li>
+ 					<li id="identity" class="li_block"></li>
+					<li id="citizenship" class="li_block"></li>
+				</ul>
+			</div>
+			<div id="physical_info">
+				<h3 id="name">Physical Attributes</h3>
+				<ul>
+					<li id="height" class="li_block"></li>
+					<li id="weight" class="li_block"></li>
+					<li id="eyes" class="li_block"></li>
+ 					<li id="hair" class="li_block"></li>
+				</ul>
+				<div id="physical-attributes">
+				</div>
+			</div>			
+		</div>
+		<div class="image_container">
+			
+			<img id="thumbnail"></img>
+			
+		</div>
+		
+		
+		<div class="rem_info scrollbar-black">
+			<div>
+				<h3>Occupation : </h3>
+				<div id="occupation"></div>
+			</div>
+			<div>
+				<h3>Power : </h3>
+				<div id="power"></div>
+			</div>
+			<div>
+				<h3>Abilities : </h3>
+				<div id="abilities"></div>
+			</div>
+			<div>
+				<h3>Weapons : </h3>
+				<div id="weapons"></div>
+			</div>			
+		</div>
+		
+		<div class="bio_info scrollbar-black">
+			<h3>Bio : </h3>
+			<div id="xxx"></div>
+			<p id="bio_body"></p>
+		</div>
+		<div class="comic_info scrollbar-black">
+			<h3>Has appeared in :</h3>
+			<div id="comicTitles"></div>
 		</div>
 		<br />
-		<h3>Has appeared in :</h3>
-		<div id="comicTitles">
-
-		</div>
-		<br />
-		<p id="info"></p>
 	</body>
 	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript">
@@ -40,6 +89,27 @@
 				txt = sessionStorage.getItem('myKeyId');
 			
 				var api = require('marvel-api');
+				var request = require('request');
+				var cheerio = require('cheerio');
+
+
+			    
+/*
+							for(var i=1 ; i<5; i++ ){
+			                	var $li = $("<li>");
+			                	var $h3 = $("<h3>",{ class: "title"});
+			                	var $p  = $("<p>",{ class : "value"});
+
+			                	//$h3.append(arrayLi[i-1]);
+			                	$p.append(data.children().eq(i).last().text());
+
+						        $li.append($h3);
+						        $li.append($p);
+					    		$("#myList").append($li);
+					    		console.log("i =" + i.toString());
+			                }
+*/
+
 
 			  	var marvel = api.createClient({
 
@@ -55,13 +125,220 @@
 			      		return console.error("Find error");
 			    	}
 			    	//console.log(results.data[0].description);
-			    	document.getElementById("name").innerHTML = results.data[0].name.toString();
+			    	document.getElementById("heroName").innerHTML = results.data[0].name.toString();
 			    	var str1 = results.data[0].thumbnail.path.toString();
-			        var str2 = "/portrait_incredible.jpg";
+			        //var str2 = "/portrait_incredible.jpg";
+			        var str2 = ".jpg";
 			        var imgPath = str1.concat(str2);
 			    	document.getElementById("thumbnail").setAttribute("src", imgPath.toString());
 			    	document.getElementById("description").innerHTML = results.data[0].description.toString();
+
 			    	//document.getElementById("info").innerHTML = JSON.stringify(results).toString();
+			    	//console.log(JSON.stringify(results).toString());
+
+
+			    	//url = 'http://marvel.com/universe/Deadpool';
+			    	url = results.data[0].urls[1].url.toString();
+
+			    request(url, function(error, response, html){
+
+			        if(!error){
+			            var $ = cheerio.load(html);
+			            var universe, real_name, aliases,identity,citizenship;
+			           var json = { universe : "", real_name : "", aliases : "", identity :"", citizenship : ""};
+
+			            // We'll use the unique header class as a starting point.
+
+			            $('#powerbox').filter(function(){
+			                var data = $(this);
+			                var arr;
+			                //title = data.children().eq(1).first().text();
+			                var nnn = data.children();
+			                console.log("---------- " + nnn.length);
+
+			                universe = data.children('p').eq(0).first().text();
+							function splitUniverse(){
+							    var ret;
+							    universe = universe.split(' ');
+							    universe.unshift("<span class=grey>");
+							    universe = universe.join(' ');
+							    ret = universe.replace(/([a-z][A-Z])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){} //wait for the result until it's available, cause the blocking
+							    console.log("universe : " + ret);	
+							    document.getElementById("universe").innerHTML = ret;
+							    json.universe = universe;
+							}
+							splitUniverse();
+
+							real_name = data.children('p').eq(1).first().text();
+							function splitRealName(){
+							    var ret;
+							    real_name = real_name.split(' ');
+							    real_name.unshift("<span class=grey>");
+							    real_name = real_name.join(' '); 
+							    ret = real_name.replace(/([a-z][A-Z])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("real_name").innerHTML = ret;
+							    json.real_name = real_name;
+							}
+							splitRealName();
+
+							aliases = data.children('p').eq(2).first().text();
+							function splitAliases(){
+							    var ret;
+							    aliases = aliases.split(' ');
+							    aliases.unshift("<span class=grey>");
+							    aliases = aliases.join(' ');  
+							    ret = aliases.replace(/([a-z][A-Z])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("aliases").innerHTML = ret;
+							    json.aliases = aliases;
+							}
+							splitAliases();
+
+							identity = data.children('p').eq(3).first().text();
+							function splitIdentity(){
+							    var ret;
+							    identity = identity.split(' ');
+							    identity.unshift("<span class=grey>");
+							    identity = identity.join(' '); 
+							    ret = identity.replace(/([a-z][A-Z])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("identity").innerHTML = ret;
+							    json.identity = identity;
+							}
+							splitIdentity();
+
+							citizenship = data.children('p').eq(4).first().text();
+							function splitCitizenship(){
+							    var ret;
+							    citizenship = citizenship.split(' ');
+							    citizenship.unshift("<span class=grey>");
+							    citizenship = citizenship.join(' ');  
+							    ret = citizenship.replace(/([a-z][A-Z])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("citizenship").innerHTML = ret;
+							    json.citizenship = citizenship;
+							}
+							splitCitizenship();
+						});
+					
+						$('#char-occupation-content').filter(function(){
+			                var data = $(this);
+			               	document.getElementById("occupation").innerHTML = data.text();
+						});
+
+						$('#char-powers-content').filter(function(){
+			                var data = $(this);
+			               	document.getElementById("power").innerHTML = data.text();
+						});
+
+						$('#char-abilities-content').filter(function(){
+			                var data = $(this);
+			               	document.getElementById("abilities").innerHTML = data.text();
+						});
+
+						$('#char-weapons-content').filter(function(){
+			                var data = $(this);
+			               	document.getElementById("weapons").innerHTML = data.text();
+						});
+
+						$('#char-physicals-content').filter(function(){
+			                var data = $(this);
+
+			                var height = data.children('p').eq(0).text();;
+							function splitHeight(){
+							    var ret;
+							    height = height.split(' ');
+							    height.unshift("<span class=grey>");
+							    height = height.join(' ');  
+							    ret = height.replace(/([a-z][0-9])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("height").innerHTML = ret;
+							}
+							splitHeight();
+
+							var weight = data.children('p').eq(1).text();;
+							function splitWeight(){
+							    var ret;
+							    weight = weight.split(' ');
+							    weight.unshift("<span class=grey>");
+							    weight = weight.join(' ');  
+							    ret = weight.replace(/([a-z][0-9])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("weight").innerHTML = ret;
+							}
+							splitWeight();
+
+							var eyes = data.children('p').eq(2).text();;
+							function splitEyes(){
+							    var ret;
+							    eyes = eyes.split(' ');
+							    eyes.unshift("<span class=grey>");
+							    eyes = eyes.join(' '); 
+							    ret = eyes.replace(/([a-z][A-Z])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("eyes").innerHTML = ret;
+							}
+							splitEyes();
+
+							var hair = data.children('p').eq(3).text();;
+							function splitHair(){
+							    var ret;
+							    hair = hair.split(' ');
+							    hair.unshift("<span class=grey>");
+							    hair = hair.join(' ');  
+							    ret = hair.replace(/([a-z][A-Z])/, function(v) { 
+				                	var va = v.split("");
+				                	v = va.join(" :</span> ");
+				                	return v; 
+				                });
+							    while(ret === undefined){}	
+							    document.getElementById("hair").innerHTML = ret;
+							}
+							splitHair();
+						});
+
+						$('#biobody').filter(function(){
+			                var data = $(this);
+			                document.getElementById("bio_body").innerHTML = data.text();
+			                //document.getElementById("bio_body").innerHTML = data.children('p').first().text();
+						});
+					}
+			    });
+
 			  	});
 
 			  	marvel.characters.comics(txt,10,0,function(err, results) {
