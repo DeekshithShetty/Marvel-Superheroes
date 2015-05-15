@@ -5,13 +5,8 @@
   "main": "index.html",
   "window": {
         "toolbar": false,
-        "resizable": false,
-        "width": 1000,
-        "height": 600,
-        "min_width": 1000,
-        "min_height": 600,
-        "max_width": 1000,
-        "max_height": 600
+        "fullscreen": true,
+        "frame": true
     },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
