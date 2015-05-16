@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Marvel</title>
+		<style type="text/css">
+			@font-face {
+				font-family: segoeFont;
+			    src: url("./css/segoe_ui_light.ttf");
+			}
+			@font-face {
+				font-family: marvelFont;
+			    src: url("./css/AmericanCaptain.ttf");
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="./css/comicPage.css"></link>
+	</head>
+	<body onload="myFunction()">
+		<!--
+		<div id="titleBar">
+			<p>Welcome to Marvel App</p>
+			<button class="closeButton">X</button>
+		</div>
+		-->
+		<div class="header">
+			<a class="goBack" href="./infoPage.html">&#10096;&#10096;</a>
+		</div>
+		<br />
+		<br />
+		<div class="left_container scrollbar-red">
+			<h1 id="comicTitle"></h1>		
+			<div id="comic_info">
+				<h4>Published : <span id="publishedDate"></span></h4>
+				<h4>Added to Marvel Unlimited : <span id="unlimitedDate"></span></h4>
+				<h4>Print Edition Price : <span id="printPrice"></span></h4>
+				<h4>Digital Edition Price : <span id="digitalPrice"></span></h4>
+			</div>	
+			<div id="buy_box">
+				<button class="buy-flat-button" id="purchase">BUY</button>
+				<button class="read-flat-button" id="reader">READ SAMPLE</button>
+			</div>
+		</div>
+		<div class="image_container">
+			
+			<img id="thumbnail"></img>
+			
+		</div>
+		
+		
+		<div class="rem_info scrollbar-black">
+			<div>
+				<h3>Summary : </h3>
+				<h4 id="summary"></h4>
+			</div>			
+		</div>
+		
+		<div class="bio_info scrollbar-black">
+			<h3 id="pricing">Creators</h3>
+			<ul id="creators"></ul>
+			<div id="character_info" style="clear:both">
+				<h3 id="pricing">Characters</h3>
+				<ul id="characters"></ul>	
+			</div>			
+		</div>
+
+		<div class="comic_info scrollbar-black">
+			<h3>Images</h3>
+			<div id="comicTitles"></div>
+		</div>
+		<br />
+	</body>
+	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+
+			var txt;
+
+			function myFunction(){
+
+				txt = sessionStorage.getItem('myComicId');
+				console.log("Comic -- Id == " + txt.toString());
+			
+				var api = require('marvel-api');
+				var request = require('request');
+				var cheerio = require('cheerio');
+
+			  	var marvel = api.createClient({
+
+			    	publicKey: 'e0c049e996366ea0bc70bd833e03d31f',
+			    	privateKey: 'c27d45753f1d2a071cea0a7e40a23bd3fad7e16e'
+
+			  	});
+			  	//console.log("Id : ",txt);
+			  	
+			  	marvel.comics.find(txt,function(err, results) {
+			    	if (err) {
+			    		$("#description").append("Couldnt find description..");
+			      		return console.error("Find error");
+			    	}
+			    	function browserLink(link){
+			          return function(){
+			            var gui = require('nw.gui');
+						gui.Shell.openExternal(link);
+			          }
+			        }
+			    	
+			    	var fullDate = results.data[0].dates[0].date.toString();
+			    	function splitPublishedDate(){
+					    var ret; 
+					    ret = fullDate.replace(/[0-9]T/, function(v) { 
+		                	var va = v.split("");
+		                	va = va.join(" ");
+		                	return va;
+		                });
+					    while(ret === undefined){}
+					    ret = ret.split(" ");	
+					    document.getElementById("publishedDate").innerHTML = ret[0];
+					}
+					splitPublishedDate();
+
+					var fullDate = results.data[0].dates[2].date.toString();
+			    	function splitDigitalDate(){
+					    var ret; 
+					    ret = fullDate.replace(/[0-9]T/, function(v) { 
+		                	var va = v.split("");
+		                	va = va.join(" ");
+		                	return va;
+		                });
+					    while(ret === undefined){}
+					    ret = ret.split(" ");		
+					    document.getElementById("unlimitedDate").innerHTML = ret[0];
+					}
+					splitDigitalDate();
+
+			        
+
+			    	document.getElementById("comicTitle").innerHTML = results.data[0].title.toString();
+			    	if(typeof results.data[0].prices[0] !== "undefined"){
+			    		document.getElementById("printPrice").innerHTML = "$" + results.data[0].prices[0].price.toString();
+			    	}else{
+			    		document.getElementById("printPrice").innerHTML = " NA";
+			    	}
+			    	if(typeof results.data[0].prices[1] !== "undefined"){
+			    		document.getElementById("digitalPrice").innerHTML = "$" + results.data[0].prices[1].price.toString(); 
+			    	}else{
+			    		document.getElementById("digitalPrice").innerHTML = " NA";
+			    	}
+			    	
+			    	if(typeof results.data[0].urls[3] !== "undefined"){
+			    		console.log("If case....");
+			    		document.getElementById("purchase").onclick = browserLink(results.data[0].urls[3].url.toString());
+			    	}else{
+			    		document.getElementById("purchase").onclick = browserLink(results.data[0].urls[0].url.toString());
+			    	}	
+
+			    	if(typeof results.data[0].urls[2] !== "undefined"){
+			    		console.log("If case....");
+			    		document.getElementById("reader").onclick = browserLink(results.data[0].urls[2].url.toString());
+			    	}else{
+			    		$("#reader").css("display", "none");
+			    		console.log("Else case....");
+			    	}	
+			    	var str1 = results.data[0].thumbnail.path.toString();
+			        var str2 = ".jpg";
+			        var imgPath = str1.concat(str2);
+			    	document.getElementById("thumbnail").setAttribute("src", imgPath.toString());
+			    	document.getElementById("summary").innerHTML = results.data[0].description.toString();
+
+			    	//document.getElementById("info").innerHTML = JSON.stringify(results).toString();
+			    	//console.log(JSON.stringify(results).toString());
+
+			    	var $div = $("<div>",{ class: "image_container2"});
+
+			    	if(results.data[0].images.length == 0){
+			    		$div.append("Sorry couldnt find any images..");
+			    		
+			    	}else{
+			    		for(var i=2;i < results.data[0].images.length;i++){
+					        var str1 = results.data[0].images[i].path.toString();
+					        var str2 = ".jpg";
+					        var imgPath = str1.concat(str2);
+					        var $img = $("<img>",{ id:"thumbImages" , src: imgPath.toString() });
+
+					        $div.append($img);
+				    	}
+			    	}
+			    	$("#comicTitles").append($div);
+			    	
+			    	//creators
+			    	for(var i=0;i < results.data[0].creators.items.length;i++){
+					    var name = results.data[0].creators.items[i].name.toString();
+					    var role = results.data[0].creators.items[i].role.toString();
+
+					    var $h4 = $("<h4>");
+				        $h4.append(name);
+				        var $p = $("<p>",{ style : "text-transform : capitalize"});
+				        $p.append(role);
+				        var $li = $("<li>",{ class : "li_block" });
+				        $li.append($h4);
+				        $li.append($p);
+
+				        $("#creators").append($li);
+				    }
+
+				    for(var i=0;i < results.data[0].characters.items.length;i++){
+					    var name = results.data[0].characters.items[i].name.toString();
+
+					    var $h4 = $("<h4>");
+				        $h4.append(name);
+				       
+				        var $li = $("<li>",{ class : "li_block" });
+				        $li.append($h4);
+
+				        $("#characters").append($li);
+				    }
+			  	});	  	
+			}
+
+
+	  	</script>
+</html>
+
+

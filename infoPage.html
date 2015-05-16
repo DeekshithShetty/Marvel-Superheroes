@@ -15,6 +15,12 @@
 		<link rel="stylesheet" type="text/css" href="./css/infoPage.css"></link>
 	</head>
 	<body onload="myFunction()">
+		<!--
+		<div id="titleBar">
+			<button class="closeButton">X</button>
+			<p>Welcome to Marvel App</p>			
+		</div>
+		-->
 		<div class="header">
 			<a href="./home.html">&#10096;&#10096;</a>
 		</div>
@@ -84,8 +90,10 @@
 	</body>
 	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript">
+
 			var txt;
 			function myFunction(){
+				
 				txt = sessionStorage.getItem('myKeyId');
 			
 				var api = require('marvel-api');
@@ -266,7 +274,7 @@
 						$('#char-physicals-content').filter(function(){
 			                var data = $(this);
 
-			                var height = data.children('p').eq(0).text();;
+			                var height = data.children('p').eq(0).text();
 							function splitHeight(){
 							    var ret;
 							    height = height.split(' ');
@@ -282,7 +290,7 @@
 							}
 							splitHeight();
 
-							var weight = data.children('p').eq(1).text();;
+							var weight = data.children('p').eq(1).text();
 							function splitWeight(){
 							    var ret;
 							    weight = weight.split(' ');
@@ -298,7 +306,7 @@
 							}
 							splitWeight();
 
-							var eyes = data.children('p').eq(2).text();;
+							var eyes = data.children('p').eq(2).text();
 							function splitEyes(){
 							    var ret;
 							    eyes = eyes.split(' ');
@@ -314,7 +322,7 @@
 							}
 							splitEyes();
 
-							var hair = data.children('p').eq(3).text();;
+							var hair = data.children('p').eq(3).text();
 							function splitHair(){
 							    var ret;
 							    hair = hair.split(' ');
@@ -341,23 +349,34 @@
 
 			  	});
 
-			  	marvel.characters.comics(txt,10,0,function(err, results) {
+			  	marvel.characters.comics(txt,20,0,function(err, results) {
 			  		if (err) {
 			  			$("#comicTitles").append("Couldnt find any comic books..");
 			      		return console.error("Comic book error");
 			    	}
+			    	//console.log(JSON.stringify(results).toString());
+			    	function createCallback(str){
+			          return function(){
+			            sessionStorage.setItem('myComicId',str);
+			            window.open('./comicPage.html',"_self");
+			          }
+			        }
+
 			    	var len = 0;
 			    	for(var i=0;i < results.data.length;i++){
 			    		var $div = $("<div>",{ class: "comic-container"});
+			    		$div.click(createCallback(results.data[i].id.toString()));
 
 				        var $p = $("<p>").append(results.data[i].title.toString());
 				        var str1 = results.data[i].thumbnail.path.toString();
 				        var str2 = "/portrait_xlarge.jpg";
 				        var imgPath = str1.concat(str2);
 				        var $img = $("<img>",{ src: imgPath.toString() });
+				        var $div2 = $("<div>",{ class: "comic_title-container"});
 
 				        $div.append($img);
-				        $div.append($p);
+				        $div2.append($p);
+				        $div.append($div2);
 			    		$("#comicTitles").append($div);
 			    		len++;
 			    	}	

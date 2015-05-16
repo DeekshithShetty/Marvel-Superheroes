@@ -4,33 +4,121 @@
 	<title>Marvel</title>
 	<style type="text/css">
 	@font-face {
-    	font-family: myFirstFont;
+    	font-family: segoeFont;
 	    src: url("./css/segoe_ui_light.ttf");
 	}
 	body{
-		font-family: myFirstFont;
-		background-color: #F0F3F0;
+		font-family: segoeFont;
+		color: #F0F3F0;
+		background-color: #262D37;
 		font-size: 20px;
+		padding: 10px;
+		height: 100%;
+		width: 100%;
+	}
+	#content{
+		padding: 20px;
+		height: 100%;
+		width: 100%;
+	}
+	.container{
+		padding: 20px;
+		height: 100%;
+		width: 100%;
 	}
 	.hero-container{
-		border-style: solid;
-    	border-width: 5px;
-    	padding: 10px;
+		font-size: 30px;
+		cursor:pointer;
+		border: 2px solid #000000;
 		float: left;
 		margin-right: 20px;
 		margin-bottom: 20px;
-		background-color: #87CEEB;
-		width: 180px;
-		height: 320px;
+		background-color: #000000;
+		width: 250px;
+		height: 350px;
+	}
+	.hero_title-container{
+		text-align: center;
+		color: #FFFFFF;
+		background-color: #000000;
+		padding:5px; 
+	}
+	.hero-container:hover{
+		border: 2px solid #BE0606;
+		background-color: #BE0606; 
+	}
+	.hero-container:hover > div{
+		background-color: #BE0606;
+		color: #FFFFFF; 
+	}
+	img{
+		height: 350px;
+		width: 250px;
+	}
+	#titleBar{
+		border: 1px solid #000000;
+		width: 100%;
+		margin-left: -20px;
+		font-size: 10px;
+		margin-top: -19px;
+		padding: 2px;
+		color: #000000;
+		position: fixed;
+		height: 19px;
+		background-color: #F0F3F0;
+	}
+	.header{
+		margin-top: 10px;
+		//border: 1px solid #000000;
+		position: fixed;
+		padding: 3px;
+		width: 90%;
+	}
+	.closeButton {
+		float: right;
+		background-color:#c7c7c7;
+		cursor:pointer;
+	}
+	.closeButton:hover {
+		background-color:#BE0606;
+	}
+	a {
+		padding: 3px;
+	 	font-size: 25px;
+	 	font-weight: bolder;
+	  	color: #F0F3F0;
+	  	text-decoration: none;
+	  	transition: color 0.1s linear; 
+	  }
+	a:hover {
+		background-color: #BE0606;
+		color: #F0F3F0; 
+	}
+	a:active, a:focus {
+		color: #2c5999;
+		outline: none;
 	}
 	</style>
 </head>
 	<body>
-		<a href="./home.html">Go Back</a>
-		<h2>Search Results...</h2>
-		<div id="DynamicContent" class="container">
-
+		<!--
+		<div id="titleBar">
+			<button class="closeButton">X</button>
+			<p>Welcome to Marvel App</p>			
 		</div>
+		-->
+		<div class="header">
+			<a href="./home.html">&#10096;&#10096;</a>
+		</div>
+		<br />
+		<br />
+		<div id="content">
+			<h2>Search Results...</h2>
+			<div id="DynamicContent" class="container">
+
+			</div>
+		</div>
+		
 		<p id="info"></p>
 		<div id="wiki">
 		</div>
@@ -74,12 +162,14 @@
 
 				        var $p = $("<p>").append(data[i].name.toString());
 				        var str1 = data[i].thumbnail.path.toString();
-				        var str2 = "/portrait_fantastic.jpg";
+				        var str2 = "/portrait_uncanny.jpg";
 				        var imgPath = str1.concat(str2);
 				        var $img = $("<img>",{ src: imgPath.toString() });
+				        var $div2 = $("<div>",{ class: "hero_title-container"});
 
 				        $div.append($img);
-				        $div.append($p);
+				        $div2.append($p);
+				        $div.append($div2);
 
 				        $("#DynamicContent").append($div);
 				                   

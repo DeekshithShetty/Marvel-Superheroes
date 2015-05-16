@@ -3,6 +3,11 @@
 	<head>
 		<title>Marvel</title>
 		<script type="text/javascript">
+			var gui = require('nw.gui'); 
+		    // Get the current window
+		    var win = gui.Window.get();
+		    win.maximize();
+      
 			setTimeout(function(){
 				window.open('./home.html',"_self");
 			},1000);

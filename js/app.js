@@ -1,4 +1,3 @@
-      
       var api = require('marvel-api');
 
       var marvel = api.createClient({
@@ -14,6 +13,20 @@
            sessionStorage.setItem('myKeyName',name.toString());
            window.open('./infoSearch.html',"_self");
       };
+
+      function buttonClick(objButton){
+        var txt = objButton.value;
+          marvel.characters.findByName(txt,function(err, results) {
+              if (err) {
+                $("#noInternet").empty();
+                $("#noInternet").append("Could not connect to Marvel :(. Please make sure than internet is on");
+              }
+               $("#noInternet").empty();
+              var str = results.data[0].id.toString();
+              sessionStorage.setItem('myKeyId',str);
+              window.open('./infoPage.html',"_self");
+          });  
+      }
 /*
       var $div = $("<div>", {id: "foo", class: "a"});
       $div.click(function(){ });
