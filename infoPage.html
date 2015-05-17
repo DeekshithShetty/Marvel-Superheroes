@@ -13,6 +13,7 @@
 			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="./css/infoPage.css"></link>
+		<link rel="stylesheet" type="text/css" href="./css/loader.css"></link>
 	</head>
 	<body onload="myFunction()">
 		<!--
@@ -23,6 +24,7 @@
 		-->
 		<div class="header">
 			<a href="./home.html">&#10096;&#10096;</a>
+			<p id="attributionText">Data provided by Marvel. &copy 2015 MARVEL</p>
 		</div>
 		<br />
 		<br />
@@ -30,6 +32,32 @@
 			<h1 id="heroName"></h1>
 			<h4 id="description"></h4>
 			<div id="power_box">
+				<!-- loader -->
+				<div id="windows8">
+					<div class="windows8" style="margin-top:100px;margin-bottom:950px;">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- loader -->
 				<h3 id="name">Power Box</h3>
 				<ul>
 					<li id="universe" class="li_block"></li>
@@ -40,7 +68,7 @@
 				</ul>
 			</div>
 			<div id="physical_info">
-				<h3 id="name">Physical Attributes</h3>
+				<h3 id="name" .class="div_titles">Physical Attributes</h3>
 				<ul>
 					<li id="height" class="li_block"></li>
 					<li id="weight" class="li_block"></li>
@@ -61,6 +89,33 @@
 		<div class="rem_info scrollbar-black">
 			<div>
 				<h3>Occupation : </h3>
+				<!-- loader -->
+				<div id="windows8_2">
+					<div class="windows8" style="margin-top:200px;margin-bottom:950px;">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+						</div>
+					</div>
+				</div>			
+				<!-- loader done -->
+
 				<div id="occupation"></div>
 			</div>
 			<div>
@@ -74,19 +129,69 @@
 			<div>
 				<h3>Weapons : </h3>
 				<div id="weapons"></div>
-			</div>			
+			</div>
 		</div>
 		
 		<div class="bio_info scrollbar-black">
 			<h3>Bio : </h3>
-			<div id="xxx"></div>
+			<!-- loader -->
+			<div id="windows8_3">
+				<div class="windows8" style="margin-top:200px;margin-bottom:950px;">
+					<div class="wBall" id="wBall_1">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_2">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_3">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_4">
+						<div class="wInnerBall">
+						</div>
+					</div>
+					<div class="wBall" id="wBall_5">
+						<div class="wInnerBall">
+						</div>
+					</div>
+				</div>
+			</div>			
+			<!-- loader done -->
 			<p id="bio_body"></p>
 		</div>
 		<div class="comic_info scrollbar-black">
 			<h3>Has appeared in :</h3>
+			<!-- loader -->
+			<div id="windows8_comics">
+					<div class="windows8" style="margin-left:350px;margin-top:200px;">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- loader -->
 			<div id="comicTitles"></div>
 		</div>
-		<br />
 	</body>
 	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript">
@@ -132,7 +237,7 @@
 			    		$("#description").append("Couldnt find description..");
 			      		return console.error("Find error");
 			    	}
-			    	//console.log(results.data[0].description);
+			    	//console.log(JSON.stringify(results.meta).toString());
 			    	document.getElementById("heroName").innerHTML = results.data[0].name.toString();
 			    	var str1 = results.data[0].thumbnail.path.toString();
 			        //var str2 = "/portrait_incredible.jpg";
@@ -250,6 +355,7 @@
 							}
 							splitCitizenship();
 						});
+						
 					
 						$('#char-occupation-content').filter(function(){
 			                var data = $(this);
@@ -345,7 +451,18 @@
 			                //document.getElementById("bio_body").innerHTML = data.children('p').first().text();
 						});
 					}
+					var x = document.getElementsByClassName("left_container");
+					x[0].style.overflow = "auto";
+					document.getElementById("windows8").innerHTML = "";
+					var x = document.getElementsByClassName("rem_info");
+					x[0].style.overflow = "auto";
+					document.getElementById("windows8_2").innerHTML = "";
+					var x = document.getElementsByClassName("bio_info");
+					x[0].style.overflow = "auto";
+					document.getElementById("windows8_3").innerHTML = "";
+					//$('#windows8').html('');
 			    });
+				
 
 			  	});
 
@@ -379,7 +496,8 @@
 				        $div.append($div2);
 			    		$("#comicTitles").append($div);
 			    		len++;
-			    	}	
+			    	}
+			    	document.getElementById("windows8_comics").innerHTML = "";	
 			    	//console.log("Comic titles : " + len);
 			    	//document.getElementById("info").innerHTML = JSON.stringify(results).toString();
 			    	//console.log(JSON.stringify(results).toString());

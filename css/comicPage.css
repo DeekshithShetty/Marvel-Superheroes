@@ -152,14 +152,16 @@ div.image_container{
 	height: 550px;
 	//margin-bottom: 20px;
 	margin-left: 40px;
-	overflow: auto;
+	//overflow: auto;
+	overflow: hidden;
 }
 div.rem_info,div.bio_info{
 	margin-top: 10px;
 	float: left;
 	width: 15%;
 	height: 550px;
-	overflow: auto;
+	//overflow: auto;
+	overflow: hidden;
 	margin-left: 30px;
 	background-color: #000000;
 	border: 1px solid #000000;
@@ -206,6 +208,10 @@ div.comic_info{
 	position: fixed;
 	padding: 3px;
 	width: 90%;
+}
+#attributionText{
+	float: right;
+	font-size: 15px;
 }
 .closeButton {
 	float: right;

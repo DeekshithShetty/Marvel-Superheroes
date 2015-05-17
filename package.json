@@ -4,7 +4,7 @@
   "description": "Marvel App",
   "main": "index.html",
   "window": {
-        "icon": "icon.png",
+        "icon": "./icon.png",
         "toolbar": false,
         "width": 1300,
         "height": 600,
