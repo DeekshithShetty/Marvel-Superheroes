@@ -2,4 +2,20 @@
 Standalone Desktop application listing Marvel characters,descriptions and their associated comics.
 
 ##Snapshots
-![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/project2.png)              ![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/project.png)
+ - Home Screen
+ ![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/Snapshots/snapshot-1.png)
+ 
+ - Search Screen
+ ![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/Snapshots/snapshot-1.png)
+ 
+ - Info Screen 1
+ ![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/Snapshots/snapshot-1.png)
+ 
+ - Info Screen 2
+ ![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/Snapshots/snapshot-1.png)
+ 
+ - Info Screen 3
+ ![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/Snapshots/snapshot-1.png)
+ 
+ - Comic Info Screen
+ ![alt tag](https://raw.githubusercontent.com/DeekshithShetty/Marvel-Superheroes/master/Snapshots/snapshot-1.png)
