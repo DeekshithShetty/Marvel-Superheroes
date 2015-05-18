@@ -29,7 +29,9 @@ $(document).ready(function(){
             window.open('./infoPage.html',"_self");
           }
         }
-
+        document.getElementsByTagName("body")[0].style.overflow = "auto";;
+    	document.getElementById("windows8").innerHTML = "";
+        
       	for(var i=0;i<data.length;i++){ 
 	        var $div = $("<div>",{ class: "hero-container"});
 	        $div.click(createCallback(data[i].id.toString()));
@@ -50,8 +52,7 @@ $(document).ready(function(){
 	        len++;
       	}
 
-      	document.getElementsByTagName("body")[0].style.overflow = "auto";;
-    	document.getElementById("windows8").innerHTML = "";
+      	
 
     });
     
