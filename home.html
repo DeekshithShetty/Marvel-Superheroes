@@ -3,104 +3,17 @@
 <head>
 	<title>Marvel</title>
 	<style type="text/css">
-	@font-face {
-    	font-family: myFirstFont;
-	    src: url("./css/segoe_ui_light.ttf");
-	}
-	@font-face {
-		font-family: marvelFont;
-	    src: url("./css/AmericanCaptain.ttf");
-	}
-	body{
-		font-family: myFirstFont;
-		//background-color: #262D37;
-		font-size: 20px;
-		background-image: url("./images/home.jpg");
-		background-size:100%;
-	}
-	.hero-container{
-		cursor:pointer;
-		border-style: solid;
-    	border-width: 5px;
-    	padding: 10px;
-		float: left;
-		margin-right: 15px;
-		background-color: #87CEEB;
-		width: 180px;
-		height: 250px;
-		overflow: auto;
-	}
-	#titleBar{
-		border: 1px solid #000000;
-		width: 100%;
-		margin-left: -20px;
-		font-size: 10px;
-		margin-top: -39px;
-		padding: 2px;
-		color: #000000;
-		position: fixed;
-		height: 19px;
-		background-color: #F0F3F0;
-	}
-	.closeButton {
-		float: right;
-		background-color:#c7c7c7;
-		cursor:pointer;
-	}
-	.closeButton:hover {
-		background-color:#BE0606;
-	}
-	#title{
-		font-family: marvelFont;
-		//border: 3px solid #000000;
-		color: #FFFFFF;
-		font-size: 75px;
-		text-align: center;
-		margin-top: 40px;
-	}
-	.searchBox{
-		padding-top: 15px;
-		//border: 3px solid #000000;
-	}
-	.container2{
-		padding: 20px;
-		border-top: 5px solid #FFFFFF;
-		height: 200px;
-		width: 700px;
-	    margin-left: 280px;
-	    overflow: auto;
-	}
-	#noInternet{
-		color: #FFFFFF;
-		text-align: center;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	.flat-button {
-	  position: relative;
-	  vertical-align: top;
-	  //width: 30%;
-	  height: 30px;
-	  padding: 5px;
-	  font-size: 15px;
-	  color: #3300CC;
-	  text-align: center;
-	  background: #B8B8B8 ;
-	  border: 0;
-	  border-bottom: 2px solid #B8B8B8 ;
-	  cursor: pointer;
-	  margin-right: 15px;
-	  margin-bottom: 25px;
-	  -webkit-box-shadow: inset 0 -2px #B8B8B8 ;
-	  box-shadow: inset 0 -2px #B8B8B8;
-	}
-	.flat-button:active {
-	  top: 1px;
-	  outline: none;
-	  -webkit-box-shadow: none;
-	  box-shadow: none;
-	}	   
+		@font-face {
+	    	font-family: myFirstFont;
+		    src: url("./css/segoe_ui_light.ttf");
+		}
+		@font-face {
+			font-family: marvelFont;
+		    src: url("./css/AmericanCaptain.ttf");
+		}	
 	</style>
+
+	<link rel="stylesheet" type="text/css" href="./css/home.css"></link>
 	<link rel="stylesheet" type="text/css" href="./css/search.css"></link>
 </head>
 	<body>
@@ -155,6 +68,6 @@
 		-->
 	</body>
 	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="./js/app.js"></script>	
+	<script type="text/javascript" src="./js/home.js"></script>	
 </html>
 
