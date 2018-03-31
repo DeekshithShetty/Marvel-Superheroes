@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Marvel</title>
+	<style type="text/css">
+		@font-face {
+	    	font-family: myFirstFont;
+		    src: url("./css/segoe_ui_light.ttf");
+		}
+		@font-face {
+			font-family: marvelFont;
+		    src: url("./css/AmericanCaptain.ttf");
+		}
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="./css/home.css"></link>
+	<link rel="stylesheet" type="text/css" href="./css/search.css"></link>
+</head>
+	<body>
+		<!--
+		<div id="titleBar">
+			<p>Welcome to Marvel App</p>
+			<button class="closeButton">X</button>
+		</div>
+		-->
+		<h1 id="title">Explore the marvel characters</h1>
+		<div class="searchBox">
+			<div class="search-wrapper cf">
+		        <input type="text" placeholder="Search here..." required="" id="searchText">
+		        <button id="searchButton" onclick="searchButton()">Search</button>
+	    	</div>
+		</div>
+		<br />
+
+		<br />
+		<div class="container2">
+			<button class="flat-button" value="Spider-Man" onclick='buttonClick(this)'>Spider-Man</button>
+			<button class="flat-button" value="Wolverine" onclick='buttonClick(this)'>Wolverine</button>
+			<button class="flat-button" value="Deadpool" onclick='buttonClick(this)'>Deadpool</button>
+			<button class="flat-button" value="Hulk" onclick='buttonClick(this)'>Hulk</button>
+
+
+			<button class="flat-button" value="Iron Man" onclick='buttonClick(this)'>Iron Man</button>
+			<button class="flat-button" value="Captain America" onclick='buttonClick(this)'>Captain America</button>
+			<button class="flat-button" value="Nick Fury" onclick='buttonClick(this)'>Nick Fury</button>
+			<button class="flat-button" value="Spider-Man (2099)" onclick='buttonClick(this)'>Spider-Man (2099)</button>
+
+			<button class="flat-button" value="Thor" onclick='buttonClick(this)'>Thor</button>
+			<button class="flat-button" value="Black Widow" onclick='buttonClick(this)'>Black Widow</button>
+			<button class="flat-button" value="Mary Jane Watson" onclick='buttonClick(this)'>Mary Jane Watson</button>
+			<button class="flat-button" value="Giant Man" onclick='buttonClick(this)'>Giant Man</button>
+			<button class="flat-button" value="Jean Grey" onclick='buttonClick(this)'>Jean Grey</button>
+			<button class="flat-button" value="Black Cat" onclick='buttonClick(this)'>Black Cat</button>
+			<button class="flat-button" value="Ultron" onclick='buttonClick(this)'>Ultron</button>
+			<button class="flat-button" value="Vision" onclick='buttonClick(this)'>Vision</button>
+			<button class="flat-button" value="Hawkeye" onclick='buttonClick(this)'>Hawkeye</button>
+			<button class="flat-button" value="Wasp" onclick='buttonClick(this)'>Wasp</button>
+			<button class="flat-button" value="Black Panther" onclick='buttonClick(this)'>Black Panther</button>
+			<button class="flat-button" value="Harry Osborn" onclick='buttonClick(this)'>Harry Osborn</button>
+		</div>
+		<div id="noInternet">
+
+		</div>
+		<!--
+		<div id="DynamicContent" class="container">	</div>
+
+		<p id="info"></p>
+		-->
+	</body>
+	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="./js/home.js"></script>
+</html>

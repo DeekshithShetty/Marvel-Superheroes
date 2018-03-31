@@ -1,0 +1,19 @@
+{
+  "name": "MarvelApp",
+  "version": "1.0.0",
+  "description": "Marvel App",
+  "main": "index.html",
+  "window": {
+        "icon": "./icon.png",
+        "toolbar": false,
+        "width": 1300,
+        "height": 600,
+        "min_width": 1200,
+        "min_height": 600
+    },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

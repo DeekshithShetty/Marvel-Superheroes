@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Marvel</title>
+		<style type="text/css">
+			@font-face {
+				font-family: segoeFont;
+			    src: url("./css/segoe_ui_light.ttf");
+			}
+			@font-face {
+				font-family: marvelFont;
+			    src: url("./css/AmericanCaptain.ttf");
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="./css/comicPage.css"></link>
+		<link rel="stylesheet" type="text/css" href="./css/loader.css"></link>
+	</head>
+	<body onload="myFunction()">
+		<!--
+		<div id="titleBar">
+			<p>Welcome to Marvel App</p>
+			<button class="closeButton">X</button>
+		</div>
+		-->
+		<div class="header">
+			<a class="goBack" href="./infoPage.html">&#10096;&#10096;</a>
+			<p id="attributionText">Data provided by Marvel. &copy 2015 MARVEL</p>
+		</div>
+		<br />
+		<br />
+		<div class="left_container scrollbar-red">
+			<h1 id="comicTitle"></h1>
+			<!-- loader -->
+				<div id="windows8">
+					<div class="windows8" style="margin-top:200px;margin-bottom:950px;">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- loader -->
+
+			<div id="comic_info">
+				<h4>Published : <span id="publishedDate"></span></h4>
+				<h4>Added to Marvel Unlimited : <span id="unlimitedDate"></span></h4>
+				<h4>Print Edition Price : <span id="printPrice"></span></h4>
+				<h4>Digital Edition Price : <span id="digitalPrice"></span></h4>
+			</div>	
+			<div id="buy_box">
+				<button class="buy-flat-button" id="purchase">BUY</button>
+				<button class="read-flat-button" id="reader">READ SAMPLE</button>
+			</div>
+		</div>
+		<div class="image_container">
+			
+			<img id="thumbnail"></img>
+			
+		</div>
+		
+		
+		<div class="rem_info scrollbar-black">
+			<div>
+				<h3>Summary : </h3>
+				<!-- loader -->
+				<div id="windows8_2">
+					<div class="windows8" style="margin-top:200px;margin-bottom:950px;">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- loader -->
+				<h4 id="summary"></h4>
+			</div>			
+		</div>
+		
+		<div class="bio_info scrollbar-black">
+			<h3 id="pricing">Creators</h3>
+			<!-- loader -->
+				<div id="windows8_3">
+					<div class="windows8" style="margin-top:200px;margin-bottom:950px;">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- loader -->
+			<ul id="creators"></ul>
+			<div id="character_info" style="clear:both">
+				<h3 id="pricing">Characters</h3>
+				<ul id="characters"></ul>	
+			</div>			
+		</div>
+
+		<div class="comic_info scrollbar-black">
+			<h3>Images</h3>
+			<!-- loader -->
+			<div id="windows8_comics">
+					<div class="windows8" style="margin-left:350px;margin-top:200px;">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall">
+							</div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- loader -->
+			<div id="comicTitles"></div>
+		</div>
+		<br />
+	</body>
+	<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="./js/comicPage.js"></script>
+</html>
+
+
